@@ -10,6 +10,12 @@
 #
 ############################################################################################-------------
 #Change ME ###--
+
+#App Details--
+$appID="UPDATE ME"
+$dirid="UPDATE ME"
+# Encrypted App Secret - export using SaveSecureString function in the scirpt
+$secretPath="D:\AAD\secret.txt" # Chage me.
 #email Config.
 $from="Sunil@lab365.in"
 $to="Sunil@lab365.in"
@@ -18,9 +24,6 @@ $smtp=<mysmtpsrv>
 #dir Config
 $reportLogPath="D:\AAD\Logs"
 $reportPath="D:\AAD\Reports"
-
-# Encrypted App Secret - export using SaveSecureString function in the scirpt
-$secretPath="D:\AAD\secret.txt" 
 #change ME end--
 
 write-host "Starting transcript..."
@@ -82,13 +85,11 @@ foreach ($i in 0..1) {
 
                   return $decodedToken
 }
-function connectMGGraph {
-param($SecretFile)
+function ConnectMGGraph {
+param($AppID,$DirID,$SecretFile)
 $sec=decryptsecureString -encryptDatafile $SecretFile 
 $secret=(ConvertTo-SecureString $sec -AsPlainText -Force)
-$appID="59f6b285-5bb6-4b3a-91ed-5f40a03ee109"
-$dirid="5d471751-9675-428d-917b-70f44f9630b0"
-$AT=Get-MsalToken -ClientId $appID -ClientSecret $secret -TenantId $dirid
+$AT=Get-MsalToken -ClientId $AppID -ClientSecret $secret -TenantId $DirID
 $AccessToken=$at.AccessToken
 #GetJWTDetails -token $AccessToken | select -ExpandProperty roles
 Connect-MgGraph -AccessToken $AccessToken # -Scopes "Application.Read.All"
@@ -112,7 +113,7 @@ $now=get-date
 #########-----------------------------------------------------------------------------------------------------------
 
 Write-Host "Connecting to Microsoft Graph.."
-connectMGGraph -SecretFile $secretPath
+ConnectMGGraph -AppID $appID -DirID $DirID -SecretFile $secretPath
 
 Write-Host "Fetching Azure AD Apps.."
 $Applications=Get-MgApplication -All
