@@ -10,8 +10,8 @@
 
 #Adjust the following--
 write-host "Starting transcript..."
-$reportPAth="D:\ADExtToAzureScripts\Groups\Reports"
-$reportLogPath="D:\ADExtToAzureScripts\Groups\Logs"
+$reportPAth="D:\MyScripts\Reports"
+$reportLogPath="D:\MyScripts\Logs"
 
 Start-Transcript -Path $("$reportLogPath\MG-Group-Summary-Report-$(get-date -f "dd-MM-yyyy").log")
 $reportName="$reportPAth\MG-Group-Summary-Report-$(get-date -f "dd-MM-yyyy").csv"
