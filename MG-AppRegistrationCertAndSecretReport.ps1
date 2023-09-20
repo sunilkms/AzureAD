@@ -91,10 +91,9 @@ $sec=decryptsecureString -encryptDatafile $SecretFile
 $secret=(ConvertTo-SecureString $sec -AsPlainText -Force)
 $AT=Get-MsalToken -ClientId $AppID -ClientSecret $secret -TenantId $DirID
 $AccessToken=$at.AccessToken
-#GetJWTDetails -token $AccessToken | select -ExpandProperty roles
-Connect-MgGraph -AccessToken $AccessToken # -Scopes "Application.Read.All"
-#$applications=Get-MgApplication -All
+Connect-MgGraph -AccessToken $AccessToken
 }
+
 ############################ Report Name and Loations #############################################################
 
 $NESecretPath="$reportPath\Near_expire_secret-$(get-date -f "dd-MM-yyyy").csv"
