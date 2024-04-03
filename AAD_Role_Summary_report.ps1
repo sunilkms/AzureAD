@@ -160,8 +160,8 @@ $css
   <div class="column" style="background-color:#33E3FF;">
     <h4>Roles Summary</h4>
     <p>
-       Total caa.nokia.com Accounts with roles =$(($report | group UserPrincipalName).count)</br>
-       Total csa.nokia.com Accounts with roles =$(($reportcsa | group UserPrincipalName).count)</br>
+       Total caa.lab365.com Accounts with roles =$(($report | group UserPrincipalName).count)</br>
+       Total csa.lab365.com Accounts with roles =$(($reportcsa | group UserPrincipalName).count)</br>
        Total AzureAD Applications with role assignment=$(($nonUser | group DisplayName).count)</br>
        Total Global Admins in Org=$(($report | group AzureADrole | ? {$_.Name -match "Global Administrator"}).Count)</br>       
        </br></br></br>      
